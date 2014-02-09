@@ -7,8 +7,11 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ServeurTCP {
+	static final int nbThreads = 2 ;  
 	static String charset;
 	public static void main(String[] args) throws IOException {
 		if (args.length < 2)
@@ -18,12 +21,12 @@ public class ServeurTCP {
 		ServerSocket server = null;
 		try {
 			server = new ServerSocket(9999);
+			ExecutorService service = Executors.newFixedThreadPool(nbThreads);
 			while (true) {
 				System.out.println("Serveur en attente.");
 				Socket socketVersUnClient = null;
 				socketVersUnClient = server.accept();
-				Thread t = new Thread(new TraiteUnClient(socketVersUnClient)); 
-				t.start();
+				service.execute(new TraiteUnClient(socketVersUnClient));
 				System.out.println("Le client " + socketVersUnClient.getInetAddress() + " est connecté.");
 				//traiterSocketCliente(socketVersUnClient);
 			}
