@@ -92,9 +92,13 @@ public class ServeurTCP {
 	
 	public static String avoirNom(BufferedReader reader) throws IOException {
 		String tmp = reader.readLine();
-		String[] truc = new String[2];
-		truc = tmp.split(" : ");
-		System.out.println(truc[1]);
-		return truc[1];
+		String[] truc;
+		if(tmp!=null){
+			truc = tmp.split(" : ");
+			if(truc.length >=2){
+				return truc[1];
+				}
+			}
+		return "unknown";
 	}
 }
