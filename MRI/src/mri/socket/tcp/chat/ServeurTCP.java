@@ -14,7 +14,7 @@ import java.util.concurrent.Executors;
 
 public class ServeurTCP {
 	private static   List<PrintWriter> printerSocketActives = new ArrayList<PrintWriter>();
-	static final int nbThreads = 2 ;  
+	static final int nbThreads = 3 ;  
 	static String charset;
 	public static void main(String[] args) throws IOException {
 		if (args.length < 2)

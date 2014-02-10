@@ -39,7 +39,7 @@ public class ClientTCP {
 			recevoir.start();
 			String str = lireMessageAuClavier();
 			while (!str.equals("fin")) {
-				envoyerMessage(wri, str);
+				envoyerMessage(wri, name + "> " + str);
 				str = lireMessageAuClavier();
 			}
 			client.close();
